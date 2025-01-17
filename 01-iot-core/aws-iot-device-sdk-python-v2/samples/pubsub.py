@@ -138,7 +138,9 @@ if __name__ == '__main__':
             mqtt_connection.publish(
                 topic=message_topic,
                 payload=message_json,
-                qos=mqtt.QoS.AT_LEAST_ONCE)
+                qos=mqtt.QoS.AT_LEAST_ONCE,
+                retain=True
+                )
             time.sleep(1)
             publish_count += 1
 

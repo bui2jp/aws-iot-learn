@@ -34,3 +34,7 @@ fi
 # run pub/sub sample app using certificates downloaded in package
 printf "\nRunning pub/sub sample application...\n"
 python3 aws-iot-device-sdk-python-v2/samples/pubsub.py --endpoint a3clczm6ayv88a-ats.iot.ap-northeast-1.amazonaws.com --ca_file root-CA.crt --cert my-thing-01.cert.pem --key my-thing-01.private.key --client_id basicPubSub --topic sdk/test/python --count 0
+#python3 aws-iot-device-sdk-python-v2/samples/pubsub.py --endpoint d04636421625i16ighfkf-ats.iot.ap-northeast-1.amazonaws.com --ca_file root-CA.crt --cert my-thing-01.cert.pem --key my-thing-01.private.key --client_id basicPubSub --topic sdk/test/python --count 0
+
+
+

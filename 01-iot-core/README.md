@@ -45,3 +45,9 @@ SELECT * FROM "dt/fa-app/incoming/#"
 - Republish で指定できるトピックの最大文字数 (max 256 バイト)
 - Republish に使用する IAM ロールのポリシー
 - コスト 必ず２つの MQTT メッセージが発生。Basic Ingest の利用。 DynamoDB のコストもかかる。
+
+### 環境毎の切り替え
+
+ドメイン設定で切り替える方法もあり。
+
+aws iot create-domain-configuration --domain-configuration-name "myDomainByCli" --service-type "DATA"
