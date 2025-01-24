@@ -135,12 +135,17 @@ if __name__ == '__main__':
             message = "{} [{}]".format(message_string, publish_count)
             print("Publishing message to topic '{}': {}".format(message_topic, message))
             message_json = json.dumps(message)
-            mqtt_connection.publish(
-                topic=message_topic,
-                payload=message_json,
-                #qos=mqtt.QoS.AT_LEAST_ONCE) 変えてみる
-                qos=mqtt.QoS.AT_MOST_ONCE)
-            time.sleep(0.01)
+
+            try:
+                mqtt_connection.publish(
+                    topic=message_topic,
+                    payload=message_json,
+                    qos=mqtt.QoS.AT_LEAST_ONCE)
+                    # qos=mqtt.QoS.AT_MOST_ONCE)
+                time.sleep(0.1)
+            except Exception as e:
+                print("Error publishing: {}".format(e))
+
             publish_count += 1
 
     # Wait for all messages to be received.
