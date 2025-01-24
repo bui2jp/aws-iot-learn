@@ -126,7 +126,7 @@ if __name__ == '__main__':
 
             publish_completion_data = publish_future.result(TIMEOUT)
             print("PubAck received with {}".format(repr(publish_completion_data.puback.reason_code)))
-            time.sleep(1)
+            #time.sleep(1)
             publish_count += 1
 
     received_all_event.wait(TIMEOUT)
