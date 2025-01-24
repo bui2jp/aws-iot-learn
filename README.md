@@ -46,6 +46,14 @@ AWS Certificate Manager (ACM)：SSL/TLS 証明書の発行・管理サービス�
 | 6        | Amazon OpenSearch Service + OpenSearch Service Dashboards/Amazon Managed Grafana    |      |
 | 7        | AWS IoT Core + AWS Lambda + Amazon DynamoDB + Amazon QuickSight / Custom Dashboards |      |
 
+# セキュリティ 証明書
+
+- デバイスの作成
+- 証明書の作成とデバイスにアタッチ
+- ポリシーを作成して証明書にアタッチ
+
+AWS 管理のサーバー認証用 CA 証明書は[こちら](https://docs.aws.amazon.com/ja_jp/iot/latest/developerguide/server-authentication.html?icmpid=docs_iot_console#server-authentication-certs)で入手可能。
+
 # IoT の始め方のベストプラクティス
 
 小さく始める
@@ -58,3 +66,15 @@ AWS Certificate Manager (ACM)：SSL/TLS 証明書の発行・管理サービス�
 4. 通知
 
 この順番
+
+# QoS レベル
+
+MQTT サービス品質 (QoS) レベル 0 と 1 をサポートしている
+
+| QoS レベル | 送信回数                                                                                  | 説明                                                                                                                       | まとめ                       |
+| ---------- | ----------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| 0          | At most once<br>0 回以上                                                                  | このレベルは、信頼できる通信リンクを介して送信されるメッセージや、見逃しても問題がないメッセージに使用する必要があります。 | 高速<br>低負荷               |
+| 1          | At least once<br>少なくとも 1 回送信され、PUBACK 応答が受信されるまで繰り返し送信されます | 送信者が正常に配信されたことを示す PUBACK 応答を受信するまで、メッセージは完了したとはみなされません。                     | 中程度の速度・負荷<br>高信頼 |
+| 2          | Exactly once <br>(正確に 1 回)                                                            | 送信者と受信者の間で複数回の確認応答が行われます。                                                                         | 低速・高負荷<br>最高信頼     |
+
+- IoTCore 2025/01 時点では QoS2 はサポートされていない
