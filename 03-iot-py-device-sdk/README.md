@@ -54,4 +54,30 @@ python3 aws-iot-device-sdk-python-v2/samples/mqtt5_pubsub.py \
 
 ```
 
+Athena でデータを確認
+
+```sql
+SELECT * FROM "default"."my_iot_data3" WHERE message1 LIKE '%66%
+```
+
+pip install pyathena
+
+```python
+from pyathena import connect
+import pandas as pd
+
+# Athenaに接続
+conn = connect(
+    s3_staging_dir='s3://your-output-bucket/path/to/query/results/',
+    region_name='ap-northeast-1'
+)
+
+# クエリを実行
+query = 'SELECT * FROM "default"."my_iot_data3" WHERE message1 LIKE \'%66%\''
+df = pd.read_sql(query, conn)
+
+# 結果を表示
+print(df)
+```
+
 ## IoT Core にデバイスを登録

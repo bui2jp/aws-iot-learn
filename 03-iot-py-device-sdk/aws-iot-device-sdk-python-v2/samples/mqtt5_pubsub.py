@@ -117,10 +117,11 @@ if __name__ == '__main__':
         publish_count = 1
         while (publish_count <= message_count) or (message_count == 0):
             message = "{} [{}]".format(message_string, publish_count)
+            message_json = { "message1": message, "message2": "this is json format", "message3": "これはJSONです。" }
             print("Publishing message to topic '{}': {}".format(message_topic, message))
             publish_future = client.publish(mqtt5.PublishPacket(
                 topic=message_topic,
-                payload=json.dumps(message_string),
+                payload=json.dumps(message_json),
                 qos=mqtt5.QoS.AT_LEAST_ONCE
             ))
 
