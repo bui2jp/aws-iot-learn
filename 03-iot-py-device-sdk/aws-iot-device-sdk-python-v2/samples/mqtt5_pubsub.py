@@ -8,6 +8,7 @@ from concurrent.futures import Future
 import time
 import json
 from utils.command_line_utils import CommandLineUtils
+import random
 
 TIMEOUT = 100
 topic_filter = "test/topic"
@@ -116,8 +117,9 @@ if __name__ == '__main__':
 
         publish_count = 1
         while (publish_count <= message_count) or (message_count == 0):
+            random_number = random.randint(10000, 99999)
             message = "{} [{}]".format(message_string, publish_count)
-            message_json = { "message1": message, "message2": "this is json format", "message3": "これはJSONです。" }
+            message_json = { "message1": message, "message2": "this is json format", "message3": "これはJSONです。", "message4": random_number, "message5": "これは5です。" }
             print("Publishing message to topic '{}': {}".format(message_topic, message))
             publish_future = client.publish(mqtt5.PublishPacket(
                 topic=message_topic,
@@ -127,7 +129,7 @@ if __name__ == '__main__':
 
             publish_completion_data = publish_future.result(TIMEOUT)
             print("PubAck received with {}".format(repr(publish_completion_data.puback.reason_code)))
-            #time.sleep(1)
+            time.sleep(5)
             publish_count += 1
 
     received_all_event.wait(TIMEOUT)
